@@ -1,9 +1,9 @@
-import 'package:app_for_trood/models/userModel.dart';
-import 'package:app_for_trood/screens/descriptionScreen.dart';
-import 'package:app_for_trood/services/networking.dart';
-import 'package:app_for_trood/utilities/mainColor.dart';
 import 'package:flutter/material.dart';
-import 'package:app_for_trood/utilities/constants.dart';
+
+import '../utilities/constants.dart';
+import '../utilities/mainColor.dart';
+import '../services/networkingUsers.dart';
+import 'descriptionUserScreen.dart';
 
 // import 'package:app_for_trood/models/providerModel.dart';
 
@@ -15,20 +15,11 @@ class UserListScreen extends StatefulWidget {
 }
 
 class _UserListScreenState extends State<UserListScreen> {
-  // final model = WidgetModel();
-
   List<dynamic> userInfo = [];
   int? albumInfo;
 
-  // ApiHelper apiHelper = ApiHelper();
-
   @override
   Widget build(BuildContext context) {
-    albumInfoList();
-    // ApiHelper().getAlbums(0);
-    // userInfoList();
-    // final model = ProviderModel.read<WidgetModel>(context);
-    // if (model == null) return const SizedBox.shrink();
     return Container(
       child: FutureBuilder(
           future: userInfoList(),
@@ -41,7 +32,6 @@ class _UserListScreenState extends State<UserListScreen> {
                       padding: const EdgeInsets.only(right: 8, left: 8, top: 8),
                       child: Container(
                         decoration: BoxDecoration(
-                          // color: MainColor.mainColorGrey,
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.black.withOpacity(0.5),
@@ -95,12 +85,12 @@ class _UserListScreenState extends State<UserListScreen> {
                                                 padding: const EdgeInsets.only(
                                                     right: 5),
                                                 child: Text(
-                                                  'Albums: $albumInfo',
+                                                  'Albums: ${userInfo[index].albums}',
                                                   style: kSubTitleTextStyle,
                                                 ),
                                               ),
                                               Text(
-                                                'Posts: 456',
+                                                'Posts: ${userInfo[index].posts}',
                                                 style: kSubTitleTextStyle,
                                               ),
                                             ],
@@ -137,11 +127,5 @@ class _UserListScreenState extends State<UserListScreen> {
     userInfo = await ApiHelper().getUsers();
 
     return userInfo;
-  }
-
-  Future<int> albumInfoList() async {
-    int albumInfo = await ApiHelper().getAlbums(0);
-    print(albumInfo);
-    return albumInfo;
   }
 }

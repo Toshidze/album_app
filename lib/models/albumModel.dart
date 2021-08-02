@@ -1,25 +1,23 @@
-class Photo {
-  final int albumId;
+class Album {
+  final int userId;
   final int id;
   final String title;
-  final String url;
-  final String thumbnailUrl;
+  final String? firstPhoto;
 
-  const Photo({
-    required this.albumId,
+  Album({
+    required this.userId,
     required this.id,
     required this.title,
-    required this.url,
-    required this.thumbnailUrl,
+    required this.firstPhoto,
   });
 
-  factory Photo.fromJson(Map<String, dynamic> json) {
-    return Photo(
-      albumId: json['albumId'] as int,
-      id: json['id'] as int,
-      title: json['title'] as String,
-      url: json['url'] as String,
-      thumbnailUrl: json['thumbnailUrl'] as String,
+  factory Album.fromJson(
+      Map<String, dynamic> json, Map<int, String> firstPhoto) {
+    return Album(
+      userId: json['userId'],
+      id: json['id'],
+      title: json['title'],
+      firstPhoto: firstPhoto[json['id'] as int],
     );
   }
 }

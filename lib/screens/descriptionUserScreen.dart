@@ -1,5 +1,5 @@
 import 'package:app_for_trood/models/userModel.dart';
-import 'package:app_for_trood/services/networking.dart';
+import 'package:app_for_trood/services/networkingUsers.dart';
 import 'package:app_for_trood/utilities/mainColor.dart';
 import 'package:flutter/material.dart';
 import 'package:app_for_trood/utilities/constants.dart';
