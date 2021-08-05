@@ -28,10 +28,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey[800],
-      appBar: AppBar(
-        backgroundColor: MainColor.mainColorGrey,
-        title: Text('Trood.'),
-      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: MainColor.mainAccentColorYelow,

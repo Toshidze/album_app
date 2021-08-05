@@ -46,6 +46,18 @@ class ApiHelper {
     return mapNumAlbums;
   }
 
+  getNameAlbumsMap() async {
+    var response = await http.get(Uri.parse(uriAlbums));
+    String data = response.body;
+    var decodeData = jsonDecode(data);
+    List<String> listNumAlbums = [];
+    for (Map album in decodeData) {
+      listNumAlbums.add(album['title'] as String);
+    }
+
+    return listNumAlbums;
+  }
+
   getNumPostMap() async {
     var response = await http.get(Uri.parse(uriPosts));
     String data = response.body;

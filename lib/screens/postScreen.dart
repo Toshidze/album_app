@@ -78,109 +78,96 @@ class _PostScreenState extends State<PostScreen> {
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              SizedBox(
-                                                height: 40,
-                                                child: TextField(
-                                                  // onTap: () {},
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                  decoration: InputDecoration(
-                                                    labelText:
-                                                        '${widget.postItem.user!.name.toString()}',
-                                                    labelStyle: TextStyle(
-                                                        color: MainColor
-                                                            .mainAccentColorYelow
-                                                            .withOpacity(0.7)),
-                                                    contentPadding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 10),
-                                                    filled: true,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.zero,
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.zero,
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                    ),
+                                              TextFormField(
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                                decoration: InputDecoration(
+                                                  hintText:
+                                                      '${widget.postItem.user!.name.toString()}',
+                                                  hintStyle: TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.grey),
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 10),
+                                                  filled: true,
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.grey),
+                                                    borderRadius:
+                                                        BorderRadius.zero,
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero,
+                                                    borderSide: BorderSide(
+                                                        color: Colors.grey),
                                                   ),
                                                 ),
                                               ),
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              SizedBox(
-                                                height: 40,
-                                                child: TextField(
-                                                  // onTap: () {},
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                  decoration: InputDecoration(
-                                                    hintText:
-                                                        widget.postItem.title,
-                                                    hintStyle: TextStyle(
-                                                        fontSize: 8,
+                                              TextFormField(
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                                decoration: InputDecoration(
+                                                  hintText:
+                                                      '${widget.postItem.title}',
+                                                  hintStyle: TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.grey),
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 10),
+                                                  filled: true,
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
                                                         color: Colors.grey),
-                                                    contentPadding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 10),
-                                                    filled: true,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.zero,
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.zero,
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.zero,
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero,
+                                                    borderSide: BorderSide(
+                                                        color: Colors.grey),
                                                   ),
                                                 ),
                                               ),
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              SizedBox(
-                                                height: 40,
-                                                child: TextField(
-                                                  // onTap: () {},
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                  decoration: InputDecoration(
-                                                    hintText:
-                                                        widget.postItem.body,
-                                                    hintStyle: TextStyle(
-                                                        fontSize: 8,
+                                              TextFormField(
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                                decoration: InputDecoration(
+                                                  hintText:
+                                                      '${widget.postItem.body}',
+                                                  hintStyle: TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.grey),
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 10),
+                                                  filled: true,
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
                                                         color: Colors.grey),
-                                                    contentPadding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 10),
-                                                    filled: true,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.zero,
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.zero,
-                                                      borderSide: BorderSide(
-                                                          color: Colors.grey),
-                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.zero,
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero,
+                                                    borderSide: BorderSide(
+                                                        color: Colors.grey),
                                                   ),
                                                 ),
                                               ),
@@ -281,11 +268,11 @@ class _PostScreenState extends State<PostScreen> {
         backgroundColor: Colors.transparent,
         content: Text(
           'Post changed',
-          style: TextStyle(color: Colors.green),
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );
-    await Future.delayed(Duration(milliseconds: 900));
+    await Future.delayed(Duration(seconds: 3));
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
   }
 }
