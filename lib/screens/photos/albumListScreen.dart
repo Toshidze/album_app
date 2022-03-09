@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:app_for_trood/provider/data_provider.dart';
 import 'package:app_for_trood/repositories/photo_repo.dart';
-import 'package:app_for_trood/utilities/mainColor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'photo_screen.dart';
@@ -58,7 +57,6 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
     var data = context.watch<GetData>();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: MainColor.mainColorGrey,
         title: Text('Albums'),
         actions: [
           IconButton(
@@ -66,126 +64,122 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                 showDialog(
                     context: context,
                     builder: (context) => Dialog(
-                          child: Container(
-                            color: MainColor.mainColorGrey,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: StatefulBuilder(builder:
-                                  (BuildContext context, StateSetter setState) {
-                                return ListView(
-                                  shrinkWrap: true,
-                                  children: <Widget>[
-                                    Text(
-                                      'Edit post',
-                                      style: TextStyle(
-                                          fontSize: 26, color: Colors.grey),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: StatefulBuilder(builder:
+                                (BuildContext context, StateSetter setState) {
+                              return ListView(
+                                shrinkWrap: true,
+                                children: <Widget>[
+                                  Text(
+                                    'Edit post',
+                                    style: TextStyle(
+                                        fontSize: 26, color: Colors.grey),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    child: myDropdown(setState),
+                                  ),
+                                  ButtonBar(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () async {
+                                          pickerCamera(setState);
+                                        },
+                                        icon: const Icon(Icons.photo_camera),
+                                      ),
+                                      IconButton(
+                                        onPressed: () async {
+                                          pickerImage(setState);
+                                        },
+                                        icon: const Icon(Icons.photo),
+                                      ),
+                                    ],
+                                  ),
+                                  if (this._myPhoto != null)
+                                    Image.file(_myPhoto as File)
+                                  else
                                     Container(
-                                      alignment: Alignment.center,
-                                      child: myDropdown(setState),
-                                    ),
-                                    ButtonBar(
-                                      children: [
-                                        IconButton(
-                                          onPressed: () async {
-                                            pickerCamera(setState);
-                                          },
-                                          icon: const Icon(Icons.photo_camera),
+                                        height: 200,
+                                        child: const Placeholder()),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Form(
+                                    key: formKey,
+                                    child: TextFormField(
+                                      validator: (value) {
+                                        if (value!.isNotEmpty) {
+                                          return null;
+                                        } else {
+                                          return 'Please add title';
+                                        }
+                                      },
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        hintText: 'Title',
+                                        hintStyle: TextStyle(
+                                            fontSize: 12, color: Colors.grey),
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        filled: true,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.grey),
+                                          borderRadius: BorderRadius.zero,
                                         ),
-                                        IconButton(
-                                          onPressed: () async {
-                                            pickerImage(setState);
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.zero,
+                                          borderSide:
+                                              BorderSide(color: Colors.grey),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
                                           },
-                                          icon: const Icon(Icons.photo),
+                                          child: Text(
+                                            'Close',
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () async {
+                                            if (!formKey.currentState!
+                                                .validate()) {
+                                              return;
+                                            }
+
+                                            if (_myPhoto == null) {
+                                              return data
+                                                  .showToastValidPicture();
+                                            } else {
+                                              data.showPhotoToastDone();
+                                              Navigator.pop(context);
+                                            }
+                                          },
+                                          child: Text(
+                                            'Add',
+                                            style:
+                                                TextStyle(color: Colors.green),
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    if (this._myPhoto != null)
-                                      Image.file(_myPhoto as File)
-                                    else
-                                      Container(
-                                          height: 200,
-                                          child: const Placeholder()),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Form(
-                                      key: formKey,
-                                      child: TextFormField(
-                                        validator: (value) {
-                                          if (value!.isNotEmpty) {
-                                            return null;
-                                          } else {
-                                            return 'Please add title';
-                                          }
-                                        },
-                                        style: TextStyle(color: Colors.white),
-                                        decoration: InputDecoration(
-                                          hintText: 'Title',
-                                          hintStyle: TextStyle(
-                                              fontSize: 12, color: Colors.grey),
-                                          contentPadding: EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          filled: true,
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.grey),
-                                            borderRadius: BorderRadius.zero,
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.zero,
-                                            borderSide:
-                                                BorderSide(color: Colors.grey),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text(
-                                              'Close',
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () async {
-                                              if (!formKey.currentState!
-                                                  .validate()) {
-                                                return;
-                                              }
-
-                                              if (_myPhoto == null) {
-                                                return data
-                                                    .showToastValidPicture();
-                                              } else {
-                                                data.showPhotoToastDone();
-                                                Navigator.pop(context);
-                                              }
-                                            },
-                                            child: Text(
-                                              'Add',
-                                              style: TextStyle(
-                                                  color: Colors.green),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }),
-                            ),
+                                  ),
+                                ],
+                              );
+                            }),
                           ),
                         ));
               },
@@ -194,7 +188,6 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
               ))
         ],
       ),
-      backgroundColor: Colors.blueGrey[800],
       body: Container(
         child: FutureBuilder(
           future: data.photoInfoList(),

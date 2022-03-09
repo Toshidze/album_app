@@ -21,9 +21,7 @@ class PhotoScreen extends StatelessWidget {
           } else if (snapshot.hasData) {
             final ssData = snapshot.data;
             return Scaffold(
-              backgroundColor: Colors.blueGrey[800],
               appBar: AppBar(
-                backgroundColor: MainColor.mainColorGrey,
                 title: Text(
                   'Photos',
                 ),

@@ -12,9 +12,7 @@ class DescriptionUserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var data = context.watch<GetData>();
     return Scaffold(
-      backgroundColor: Colors.blueGrey[800],
       appBar: AppBar(
-        backgroundColor: MainColor.mainColorGrey,
         title: Text(
           'User info',
         ),
@@ -51,7 +49,6 @@ class DescriptionUserScreen extends StatelessWidget {
                   'Personal information',
                   style: TextStyle(
                     fontSize: 20,
-                    color: Colors.white.withOpacity(0.7),
                   ),
                 ),
                 SizedBox(
@@ -62,7 +59,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'Username: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -80,7 +76,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'Email: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -98,7 +93,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'Phone: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -116,7 +110,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'website: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -133,7 +126,6 @@ class DescriptionUserScreen extends StatelessWidget {
                   'Address',
                   style: TextStyle(
                     fontSize: 20,
-                    color: Colors.white.withOpacity(0.7),
                   ),
                 ),
                 SizedBox(
@@ -144,7 +136,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'Street: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -162,7 +153,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'Suite: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -180,7 +170,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'City: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -198,7 +187,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'Zipcode: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -215,7 +203,6 @@ class DescriptionUserScreen extends StatelessWidget {
                   'Company',
                   style: TextStyle(
                     fontSize: 20,
-                    color: Colors.white.withOpacity(0.7),
                   ),
                 ),
                 SizedBox(
@@ -226,7 +213,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'Name: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -244,7 +230,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'Catch Phrase: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
@@ -262,7 +247,6 @@ class DescriptionUserScreen extends StatelessWidget {
                     Text(
                       'BS: ',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
                         fontSize: 12,
                       ),
                     ),
