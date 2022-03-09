@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:app_for_trood/main.dart';
 import 'package:app_for_trood/provider/data_provider.dart';
 import 'package:app_for_trood/utilities/constants.dart';
 import 'package:app_for_trood/utilities/mainColor.dart';
@@ -13,14 +16,27 @@ class UserListScreen extends StatefulWidget {
 }
 
 class _UserListScreenState extends State<UserListScreen> {
+  bool value = true;
   @override
   Widget build(BuildContext context) {
+    final themeData = context.watch<ThemeNotifier>();
     var data = context.watch<GetData>();
     return Scaffold(
-      backgroundColor: Colors.blueGrey[800],
       appBar: AppBar(
-        backgroundColor: MainColor.mainColorGrey,
-        title: Text('Users'),
+        title: Row(
+          children: [
+            Text(
+              'Users',
+              style: TextStyle(fontSize: 22),
+            ),
+            Spacer(),
+            Switch(
+              activeColor: MainColor.mainAccentColorYelow,
+              onChanged: (value) => themeData.toggleTheme(),
+              value: themeData.darkTheme,
+            ),
+          ],
+        ),
       ),
       body: Container(
         child: FutureBuilder(
@@ -44,7 +60,6 @@ class _UserListScreenState extends State<UserListScreen> {
                           ),
                           child: Material(
                             borderRadius: BorderRadius.circular(5),
-                            color: MainColor.mainColorGrey,
                             child: InkWell(
                               borderRadius: BorderRadius.circular(5),
                               splashColor: MainColor.mainAccentColorYelow

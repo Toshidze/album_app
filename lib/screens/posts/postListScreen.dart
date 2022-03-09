@@ -22,9 +22,7 @@ class PostListScreen extends StatelessWidget {
           } else if (snapshot.hasData) {
             var ssData = snapshot.data;
             return Scaffold(
-              backgroundColor: Colors.blueGrey[800],
               appBar: AppBar(
-                backgroundColor: MainColor.mainColorGrey,
                 title: Text('Posts'),
               ),
               body: ListView.builder(
@@ -43,7 +41,6 @@ class PostListScreen extends StatelessWidget {
                       ),
                       child: Material(
                         borderRadius: BorderRadius.circular(5),
-                        color: MainColor.mainColorGrey,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(5),
                           splashColor:

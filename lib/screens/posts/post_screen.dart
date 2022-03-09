@@ -19,9 +19,7 @@ class _PostScreenState extends State<PostScreen> {
   Widget build(BuildContext context) {
     var data = context.watch<GetData>();
     return Scaffold(
-      backgroundColor: Colors.blueGrey[800],
       appBar: AppBar(
-        backgroundColor: MainColor.mainColorGrey,
         title: Text(
           'Post',
         ),
