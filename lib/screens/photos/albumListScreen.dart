@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:ui';
-import 'package:app_for_trood/services/networkingAlbum.dart';
-import 'package:app_for_trood/services/networkingUsers.dart';
+import 'package:app_for_trood/provider/data_provider.dart';
+import 'package:app_for_trood/repositories/photo_repo.dart';
 import 'package:app_for_trood/utilities/mainColor.dart';
 import 'package:flutter/material.dart';
-import 'photoScreen.dart';
+import 'package:provider/provider.dart';
+import 'photo_screen.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,7 +16,6 @@ class AlbumListScreen extends StatefulWidget {
 }
 
 class _AlbumListScreenState extends State<AlbumListScreen> {
-  List<dynamic> albumModel = [];
   List _dropD = [];
   String selectedCurrency = 'quidem molestiae enim';
   File? _myPhoto;
@@ -56,10 +55,11 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var data = context.watch<GetData>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MainColor.mainColorGrey,
-        title: Text('Trood.'),
+        title: Text('Albums'),
         actions: [
           IconButton(
               onPressed: () {
@@ -166,9 +166,10 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                                               }
 
                                               if (_myPhoto == null) {
-                                                return showToastValidPicture();
+                                                return data
+                                                    .showToastValidPicture();
                                               } else {
-                                                showToastDone();
+                                                data.showPhotoToastDone();
                                                 Navigator.pop(context);
                                               }
                                             },
@@ -196,7 +197,7 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
       backgroundColor: Colors.blueGrey[800],
       body: Container(
         child: FutureBuilder(
-          future: userInfoList(),
+          future: data.photoInfoList(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return GridView.builder(
@@ -204,30 +205,34 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: albumModel.length,
+                  itemCount: data.albumModel.length,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  PhotoScreen(idPhoto: albumModel[index].id),
+                              builder: (context) => PhotoScreen(index: index),
                             ));
                       },
                       child: Column(
                         children: [
                           Container(
-                              decoration: BoxDecoration(boxShadow: [
+                            decoration: BoxDecoration(
+                              boxShadow: [
                                 BoxShadow(
                                     color: Colors.black.withOpacity(0.5),
                                     blurRadius: 8,
                                     offset: Offset(0, 2))
-                              ]),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                      albumModel[index].firstPhoto))),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                '${data.albumModel[index].firstPhoto}',
+                              ),
+                            ),
+                          ),
                           SizedBox(
                             height: 10,
                           ),
@@ -235,7 +240,7 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                             width: 130,
                             child: Center(
                               child: Text(
-                                albumModel[index].title,
+                                data.albumModel[index].title,
                                 maxLines: 1,
                                 style: TextStyle(fontSize: 8),
                               ),
@@ -275,41 +280,8 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
     });
   }
 
-  Future<List> userInfoList() async {
-    albumModel = await AlbumClass().fetchAlbum();
-    return albumModel;
-  }
-
   Future<List> albumInfoList() async {
-    _dropD = await ApiHelper().getNameAlbumsMap();
+    _dropD = await PhotoRepo().getNameAlbumsMap();
     return _dropD;
-  }
-
-  showToastDone() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.transparent,
-        content: Text(
-          'Photo added',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    );
-    await Future.delayed(Duration(seconds: 3));
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-  }
-
-  showToastValidPicture() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.red,
-        content: Text(
-          'no photo',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    );
-    await Future.delayed(Duration(seconds: 3));
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
   }
 }

@@ -1,9 +1,9 @@
+import 'package:app_for_trood/screens/photos/albumListScreen.dart';
+import 'package:app_for_trood/screens/posts/postListScreen.dart';
+import 'package:app_for_trood/screens/users/user_list_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../utilities/mainColor.dart';
-import 'albumListScreen.dart';
-import 'postListScreen.dart';
-import 'userListScreen.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key? key, required this.title}) : super(key: key);
