@@ -1,11 +1,9 @@
+import 'package:app_for_trood/provider/data_provider.dart';
+import 'package:app_for_trood/utilities/constants.dart';
+import 'package:app_for_trood/utilities/mainColor.dart';
 import 'package:flutter/material.dart';
-
-import '../utilities/constants.dart';
-import '../utilities/mainColor.dart';
-import '../services/networkingUsers.dart';
-import 'descriptionUserScreen.dart';
-
-// import 'package:app_for_trood/models/providerModel.dart';
+import 'package:provider/provider.dart';
+import 'description_user_screen.dart';
 
 class UserListScreen extends StatefulWidget {
   UserListScreen({Key? key}) : super(key: key);
@@ -15,24 +13,22 @@ class UserListScreen extends StatefulWidget {
 }
 
 class _UserListScreenState extends State<UserListScreen> {
-  List<dynamic> userInfo = [];
-  int? albumInfo;
-
   @override
   Widget build(BuildContext context) {
+    var data = context.watch<GetData>();
     return Scaffold(
       backgroundColor: Colors.blueGrey[800],
       appBar: AppBar(
         backgroundColor: MainColor.mainColorGrey,
-        title: Text('Trood.'),
+        title: Text('Users'),
       ),
       body: Container(
         child: FutureBuilder(
-            future: userInfoList(),
+            future: data.userInfoList(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
-                    itemCount: userInfo.length,
+                    itemCount: data.userInfo.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding:
@@ -56,8 +52,8 @@ class _UserListScreenState extends State<UserListScreen> {
                               onTap: () {
                                 Navigator.push(context, MaterialPageRoute(
                                   builder: (context) {
-                                    return DescriptionScreen(
-                                      descriptionItem: userInfo[index],
+                                    return DescriptionUserScreen(
+                                      index: index,
                                     );
                                   },
                                 ));
@@ -83,7 +79,7 @@ class _UserListScreenState extends State<UserListScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              userInfo[index].name,
+                                              data.userInfo[index].name,
                                               style: kTitleTextStyle,
                                             ),
                                             Row(
@@ -93,12 +89,12 @@ class _UserListScreenState extends State<UserListScreen> {
                                                       const EdgeInsets.only(
                                                           right: 5),
                                                   child: Text(
-                                                    'Albums: ${userInfo[index].albums}',
+                                                    'Albums: ${data.userInfo[index].albums}',
                                                     style: kSubTitleTextStyle,
                                                   ),
                                                 ),
                                                 Text(
-                                                  'Posts: ${userInfo[index].posts}',
+                                                  'Posts: ${data.userInfo[index].posts}',
                                                   style: kSubTitleTextStyle,
                                                 ),
                                               ],
@@ -130,11 +126,5 @@ class _UserListScreenState extends State<UserListScreen> {
             }),
       ),
     );
-  }
-
-  Future<List> userInfoList() async {
-    userInfo = await ApiHelper().getUsers();
-
-    return userInfo;
   }
 }
