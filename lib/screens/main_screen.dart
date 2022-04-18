@@ -1,12 +1,10 @@
-import 'package:app_for_trood/screens/photos/albumListScreen.dart';
-import 'package:app_for_trood/screens/posts/postListScreen.dart';
+import 'package:app_for_trood/screens/photos/album_list_screen.dart';
+import 'package:app_for_trood/screens/posts/post_list_screen.dart';
 import 'package:app_for_trood/screens/users/user_list_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../utilities/mainColor.dart';
-
 class MainScreen extends StatefulWidget {
-  MainScreen({Key? key, required this.title}) : super(key: key);
+  const MainScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -27,12 +25,9 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[800],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: MainColor.mainAccentColorYelow,
-        backgroundColor: MainColor.mainColorGrey,
-        items: <BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
             label: 'Users',
@@ -51,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: IndexedStack(
         index: _selectedIndex,
-        children: [
+        children: const [
           UserListScreen(),
           AlbumListScreen(),
           PostListScreen(),
