@@ -1,29 +1,52 @@
+import 'package:app_for_trood/models/album_model.dart';
+import 'package:app_for_trood/models/user_address.dart';
+import 'package:app_for_trood/models/user_address_geo.dart';
+import 'package:app_for_trood/models/user_company.dart';
+import 'package:app_for_trood/models/user_model.dart';
 import 'package:app_for_trood/provider/data_provider.dart';
 import 'package:app_for_trood/repositories/photo_repo.dart';
 import 'package:app_for_trood/repositories/post_repo.dart';
 import 'package:app_for_trood/repositories/user_repo.dart';
-import 'package:app_for_trood/utilities/mainColor.dart';
+import 'package:app_for_trood/utilities/main_color.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'screens/main_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() => runApp(MyApp());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final document = await getApplicationDocumentsDirectory();
+  await Hive.initFlutter(document.path);
+  Hive.registerAdapter(AlbumAdapter());
+  Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(UserAddressAdapter());
+  Hive.registerAdapter(UserAddressGeoAdapter());
+  Hive.registerAdapter(UserCompanyAdapter());
+  await Hive.openBox('AlbumBox');
+  await Hive.openBox('UserBox');
+  // var box = Hive.box('UserBox');
+  // await box.clear();
+  runApp(const MyApp());
+}
+
 GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
 ThemeData light = ThemeData(
     brightness: Brightness.light,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
         backgroundColor: MainColor.mainAccentColorYelow,
         foregroundColor: Colors.black),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: MainColor.mainColorGrey));
 
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     canvasColor: MainColor.mainColorGrey,
     scaffoldBackgroundColor: Colors.blueGrey[800],
-    appBarTheme: AppBarTheme(backgroundColor: MainColor.mainColorGrey),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    appBarTheme: const AppBarTheme(backgroundColor: MainColor.mainColorGrey),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: MainColor.mainAccentColorYelow,
       backgroundColor: MainColor.mainColorGrey,
     ));
@@ -41,7 +64,7 @@ class ThemeNotifier extends ChangeNotifier {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +93,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 title: appTitle,
                 theme: notifier.darkTheme ? dark : light,
-                home: MainScreen(title: appTitle),
+                home: const MainScreen(title: appTitle),
                 scaffoldMessengerKey: scaffoldMessengerKey,
               );
             })));

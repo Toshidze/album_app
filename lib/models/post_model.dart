@@ -1,4 +1,4 @@
-import 'package:app_for_trood/models/userModel.dart';
+import 'package:app_for_trood/models/user_model.dart';
 
 class Post {
   final int userId;
@@ -12,16 +12,16 @@ class Post {
     required this.id,
     required this.title,
     required this.body,
-    required this.user,
+    this.user,
   });
 
   factory Post.fromJson(Map<String, dynamic> json, List<User> users) {
     return Post(
-      userId: json['userId'] as int,
-      id: json['id'] as int,
-      title: json['title'] as String,
-      body: json['body'] as String,
-      user: extractUser(users, json['userId'] as int),
+      userId: json['userId'],
+      id: json['id'],
+      title: json['title'],
+      body: json['body'],
+      user: extractUser(users, json['userId']),
     );
   }
 }
