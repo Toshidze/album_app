@@ -1,267 +1,266 @@
-import 'package:app_for_trood/provider/data_provider.dart';
-import 'package:app_for_trood/utilities/mainColor.dart';
+import 'package:app_for_trood/screens/photos/album_list.dart';
+import 'package:app_for_trood/screens/posts/post_list.dart';
+import 'package:app_for_trood/utilities/main_color.dart';
 import 'package:flutter/material.dart';
 import 'package:app_for_trood/utilities/constants.dart';
-import 'package:provider/provider.dart';
 
 class DescriptionUserScreen extends StatelessWidget {
   final int index;
-  DescriptionUserScreen({Key? key, required this.index}) : super(key: key);
+  final List<dynamic> data;
+  const DescriptionUserScreen(
+      {Key? key, required this.index, required this.data})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var data = context.watch<GetData>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'User info',
+          data[index].name,
+          style: const TextStyle(
+            color: MainColor.mainAccentColorYelow,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: Column(
-                children: [
-                  Container(
-                    child: Text(
-                      data.userInfo[index].name,
-                      style: TextStyle(
-                        color: MainColor.mainAccentColorYelow,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Personal information',
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Username: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].username,
+                      data[index].username,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Email: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].email,
+                      data[index].email,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Phone: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].phone,
+                      data[index].phone,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'website: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].website,
+                      data[index].website,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
-                Text(
+                const Text(
                   'Address',
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Street: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].address.street,
+                      data[index].address.street,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Suite: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].address.suite,
+                      data[index].address.suite,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'City: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].address.city,
+                      data[index].address.city,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Zipcode: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].address.zipcode,
+                      data[index].address.zipcode,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
-                Text(
+                const Text(
                   'Company',
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Name: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].company.name,
+                      data[index].company.name,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: [
-                    Text(
-                      'Catch Phrase: ',
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                    ),
-                    Text(
-                      data.userInfo[index].company.catchPhrase,
-                      style: kSubTitleTextStyle,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    Text(
+                    const Text(
                       'BS: ',
                       style: TextStyle(
                         fontSize: 12,
                       ),
                     ),
                     Text(
-                      data.userInfo[index].company.bs,
+                      data[index].company.bs,
                       style: kSubTitleTextStyle,
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
+                Text(
+                  '<< ${data[index].company.catchPhrase} >>',
+                  style: kBodyTextStyle,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text(
+                  'Posts',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                PostList(
+                  lengthList: 3,
+                  userId: data[index].id,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text(
+                  'Albums',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                AlbumList(
+                  lengthList: 3,
+                  userId: data[index].id,
+                )
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

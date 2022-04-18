@@ -10,17 +10,17 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         hintText: postItem,
-        hintStyle: TextStyle(fontSize: 12, color: Colors.grey),
-        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+        hintStyle: const TextStyle(fontSize: 12, color: Colors.grey),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         filled: true,
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.zero,
         ),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.zero,
           borderSide: BorderSide(color: Colors.grey),
         ),
