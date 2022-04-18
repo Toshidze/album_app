@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:app_for_trood/provider/data_provider.dart';
 import 'package:app_for_trood/repositories/photo_repo.dart';
+import 'package:app_for_trood/screens/photos/album_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'photo_screen.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
@@ -57,7 +57,7 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
     var data = context.watch<GetData>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Albums'),
+        title: const Text('Albums'),
         actions: [
           IconButton(
               onPressed: () {
@@ -71,12 +71,12 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                               return ListView(
                                 shrinkWrap: true,
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     'Edit post',
                                     style: TextStyle(
                                         fontSize: 26, color: Colors.grey),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Container(
@@ -99,13 +99,12 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                                       ),
                                     ],
                                   ),
-                                  if (this._myPhoto != null)
+                                  if (_myPhoto != null)
                                     Image.file(_myPhoto as File)
                                   else
-                                    Container(
-                                        height: 200,
-                                        child: const Placeholder()),
-                                  SizedBox(
+                                    const SizedBox(
+                                        height: 200, child: Placeholder()),
+                                  const SizedBox(
                                     height: 20,
                                   ),
                                   Form(
@@ -118,8 +117,9 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                                           return 'Please add title';
                                         }
                                       },
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      decoration: const InputDecoration(
                                         hintText: 'Title',
                                         hintStyle: TextStyle(
                                             fontSize: 12, color: Colors.grey),
@@ -148,7 +148,7 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                                           onPressed: () {
                                             Navigator.pop(context);
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Close',
                                             style: TextStyle(color: Colors.red),
                                           ),
@@ -168,7 +168,7 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                                               Navigator.pop(context);
                                             }
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Add',
                                             style:
                                                 TextStyle(color: Colors.green),
@@ -183,76 +183,12 @@ class _AlbumListScreenState extends State<AlbumListScreen> {
                           ),
                         ));
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.add,
               ))
         ],
       ),
-      body: Container(
-        child: FutureBuilder(
-          future: data.photoInfoList(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                  ),
-                  itemCount: data.albumModel.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PhotoScreen(index: index),
-                            ));
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black.withOpacity(0.5),
-                                    blurRadius: 8,
-                                    offset: Offset(0, 2))
-                              ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                '${data.albumModel[index].firstPhoto}',
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            width: 130,
-                            child: Center(
-                              child: Text(
-                                data.albumModel[index].title,
-                                maxLines: 1,
-                                style: TextStyle(fontSize: 8),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  });
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
-
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
-      ),
+      body: const SingleChildScrollView(child: AlbumList()),
     );
   }
 
