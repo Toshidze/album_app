@@ -15,18 +15,15 @@ class PostScreen extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              child: Text(
-                postItem.user!.name.toString(),
-                overflow: TextOverflow.fade,
-                style: const TextStyle(
-                  color: MainColor.mainAccentColorYelow,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
+            Text(
+              postItem.user?.name.toString() ?? 'User',
+              overflow: TextOverflow.fade,
+              style: const TextStyle(
+                color: MainColor.mainAccentColorYelow,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            ShowModalEditPost(postItem: postItem)
           ],
         ),
       ),
@@ -49,6 +46,7 @@ class PostScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: ShowModalEditPost(postItem: postItem),
     );
   }
 }

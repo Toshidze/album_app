@@ -1,5 +1,6 @@
 import 'package:app_for_trood/models/photo_model.dart';
 import 'package:app_for_trood/provider/data_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +43,12 @@ class PhotoScreen extends StatelessWidget {
                       ]),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.network(ssData![index].thumbnailUrl),
+                        child: CachedNetworkImage(
+                          imageUrl: ssData![index].thumbnailUrl,
+                          placeholder: (context, url) => const SizedBox(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
                       ),
                     ),
                     const SizedBox(

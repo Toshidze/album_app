@@ -1,18 +1,29 @@
 import 'package:app_for_trood/models/post_model.dart';
 import 'package:app_for_trood/provider/data_provider.dart';
+import 'package:app_for_trood/repositories/post_repo.dart';
 import 'package:app_for_trood/utilities/main_color.dart';
 import 'package:app_for_trood/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ShowModalEditPost extends StatelessWidget {
-  final Post postItem;
-  const ShowModalEditPost({Key? key, required this.postItem}) : super(key: key);
+class ShowModalEditPost extends StatefulWidget {
+  final Post? postItem;
+  final Future<dynamic>? futurePost;
+  const ShowModalEditPost({Key? key, this.postItem, this.futurePost})
+      : super(key: key);
+
+  @override
+  State<ShowModalEditPost> createState() => _ShowModalEditPostState();
+}
+
+class _ShowModalEditPostState extends State<ShowModalEditPost> {
+  final TextEditingController _controllerTitle = TextEditingController();
+  final TextEditingController _controllerBody = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var data = context.watch<GetData>();
-    return IconButton(
+    return FloatingActionButton.small(
         onPressed: () {
           showDialog(
               context: context,
@@ -32,15 +43,15 @@ class ShowModalEditPost extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            CustomTextFormField(postItem: postItem.user!.name!),
+                            CustomTextFormField(
+                                controller: _controllerTitle,
+                                postItem: widget.postItem?.title ?? ''),
                             const SizedBox(
                               height: 10,
                             ),
-                            CustomTextFormField(postItem: postItem.title),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            CustomTextFormField(postItem: postItem.body),
+                            CustomTextFormField(
+                                controller: _controllerBody,
+                                postItem: widget.postItem?.body ?? ''),
                             Center(
                               child: Row(
                                 mainAxisAlignment:
@@ -56,12 +67,20 @@ class ShowModalEditPost extends StatelessWidget {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () async {
+                                    onPressed: () {
+                                      setState(() {
+                                        PostRepo().addUserPosts(
+                                            id: 100 + 1,
+                                            title: _controllerTitle.text,
+                                            body: _controllerBody.text,
+                                            userId: 11);
+                                      });
+
                                       data.showToastDone(context);
                                       Navigator.pop(context);
                                     },
                                     child: const Text(
-                                      'Done',
+                                      'Send',
                                       style: TextStyle(color: Colors.green),
                                     ),
                                   ),
@@ -74,6 +93,6 @@ class ShowModalEditPost extends StatelessWidget {
                     ),
                   ));
         },
-        icon: const Icon(Icons.edit));
+        child: const Icon(Icons.edit));
   }
 }

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:app_for_trood/models/album_model.dart';
 import 'package:app_for_trood/models/photo_model.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 
 const uriAlbums = 'https://jsonplaceholder.typicode.com/albums';
