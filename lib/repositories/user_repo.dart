@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:app_for_trood/repositories/photo_repo.dart';
 import 'package:app_for_trood/repositories/post_repo.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -23,7 +22,6 @@ class UserRepo extends ChangeNotifier {
               e as Map<String, dynamic>, mapNumAlbums, mapNumPosts))
           .toList();
       childrenUser = userData;
-      print(childrenUser);
       return userData;
     } else {
       log('ERROR');

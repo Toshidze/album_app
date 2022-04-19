@@ -3,7 +3,6 @@ import 'package:app_for_trood/provider/data_provider.dart';
 import 'package:app_for_trood/utilities/constants.dart';
 import 'package:app_for_trood/utilities/main_color.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'description_user_screen.dart';
 

@@ -1,4 +1,4 @@
-import 'package:app_for_trood/models/album_model.dart';
+import 'package:app_for_trood/models/post_model.dart';
 import 'package:app_for_trood/models/user_address.dart';
 import 'package:app_for_trood/models/user_address_geo.dart';
 import 'package:app_for_trood/models/user_company.dart';
@@ -16,16 +16,15 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   final document = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(document.path);
-  Hive.registerAdapter(AlbumAdapter());
   Hive.registerAdapter(UserAdapter());
   Hive.registerAdapter(UserAddressAdapter());
   Hive.registerAdapter(UserAddressGeoAdapter());
   Hive.registerAdapter(UserCompanyAdapter());
-  await Hive.openBox('AlbumBox');
+  Hive.registerAdapter(PostAdapter());
   await Hive.openBox('UserBox');
+  await Hive.openBox('PostBox');
   // var box = Hive.box('UserBox');
   // await box.clear();
   runApp(const MyApp());
@@ -34,6 +33,9 @@ Future main() async {
 GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
 ThemeData light = ThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: MainColor.mainColorGrey,
+    ),
     brightness: Brightness.light,
     appBarTheme: const AppBarTheme(
         backgroundColor: MainColor.mainAccentColorYelow,
@@ -42,6 +44,9 @@ ThemeData light = ThemeData(
         selectedItemColor: MainColor.mainColorGrey));
 
 ThemeData dark = ThemeData(
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: MainColor.mainAccentColorYelow,
+    ),
     brightness: Brightness.dark,
     canvasColor: MainColor.mainColorGrey,
     scaffoldBackgroundColor: Colors.blueGrey[800],
