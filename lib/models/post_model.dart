@@ -1,10 +1,19 @@
 import 'package:app_for_trood/models/user_model.dart';
+import 'package:hive/hive.dart';
 
+part "post_model.g.dart";
+
+@HiveType(typeId: 5)
 class Post {
+  @HiveField(0)
   final int userId;
+  @HiveField(1)
   final int id;
+  @HiveField(2)
   final String title;
+  @HiveField(3)
   final String body;
+  @HiveField(4)
   final User? user;
 
   const Post({
@@ -17,7 +26,7 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json, List<User> users) {
     return Post(
-      userId: json['userId'],
+      userId: json['userId'] ?? 1,
       id: json['id'],
       title: json['title'],
       body: json['body'],

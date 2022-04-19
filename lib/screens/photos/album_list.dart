@@ -1,5 +1,6 @@
 import 'package:app_for_trood/provider/data_provider.dart';
 import 'package:app_for_trood/screens/photos/photo_screen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -58,8 +59,12 @@ class AlbumList extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            '${lengthList != null ? userData[cIndex ?? index].firstPhoto : data.albumModel[cIndex ?? index].firstPhoto}',
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                '${lengthList != null ? userData[cIndex ?? index].firstPhoto : data.albumModel[cIndex ?? index].firstPhoto}',
+                            placeholder: (context, url) => const SizedBox(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           ),
                         ),
                       ),

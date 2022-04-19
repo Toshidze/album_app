@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String postItem;
+  final TextEditingController? controller;
   const CustomTextFormField({
     Key? key,
     required this.postItem,
+    this.controller,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         hintText: postItem,
